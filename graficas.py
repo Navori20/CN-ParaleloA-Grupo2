@@ -40,7 +40,7 @@ def _estilo(figura, titulo, xlabel, ylabel):
     ax.set_facecolor("#ffffff")
     ax.set_title("Comparación de la función original y las aproximaciones de Taylor", fontsize=9, pad=9, fontweight="semibold")
     ax.set_xlabel(xlabel, fontsize=8, labelpad=3)
-    ax.set_ylabel(ylabel, fontsize=8, labelpad=3)
+    ax.grid(True, which="major", linestyle="--", linewidth=0.6, alpha=0.35)
     ax.tick_params(axis="both", labelsize=7)
     ax.grid(True, which="major", alpha=0.22)
     # Márgenes generosos para evitar cortar títulos o ejes en pestañas pequeñas.
