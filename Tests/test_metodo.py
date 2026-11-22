@@ -49,7 +49,20 @@ def test_scarborough():
     )
 
 
-def test_orden_invalido():
+def test_orden_invalido():  
     """El programa debe rechazar órdenes superiores a 15."""
     with pytest.raises(ValueError):
         taylor("exp(-x)", "0", "1", 16, 3)
+
+
+def test_taylor_seno():
+    """Comprueba la aproximación de Taylor para sin(x)."""
+    resultado = taylor("sin(x)", "0", "0.5", 15, 3)
+
+    assert resultado["valor_verdadero"] == pytest.approx(
+        math.sin(0.5), abs=1e-9
+    )
+    assert resultado["resultados"][7]["aproximacion"] == pytest.approx(
+        math.sin(0.5), abs=1e-6
+    )
+
