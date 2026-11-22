@@ -6,89 +6,153 @@
 **Paralelo:** A  
 **Grupo:** 2 — Proyecto A
 
-## Integrantes
+## Integrantes y contribuciones
 
-- Anthony Delgado
-- Juan Cedeño
-- Angelo Acosta
+- **Angelo Acosta:** estructura inicial del proyecto, integración de la interfaz gráfica con el algoritmo de Taylor y la aplicación RC; mejora de validaciones y documentación de instalación.
+- **Anthony Delgado:** mejoras en los títulos y en la cuadrícula de las gráficas; documentación para interpretar las visualizaciones.
+- **Juan Cedeño:** pruebas adicionales de la función seno y de cifras significativas inválidas; ampliación de la explicación física del capacitor RC.
 
-> **Roles y contribuciones:** completar con las responsabilidades reales de cada integrante antes de entregar. Todos deben conocer el algoritmo y la interfaz para la defensa individual.
+Cada integrante debe conocer el algoritmo y la interfaz para la defensa individual. Las contribuciones se registran en el historial de Git.
 
 ## Descripción
 
-Aplicación de escritorio desarrollada con **Python**, **PySide6** y **Qt Designer** para aproximar funciones mediante polinomios de Taylor, calcular el error de truncamiento y analizar la precisión de los resultados. Incluye el caso de ingeniería asignado al **Grupo 2: descarga de un capacitor en un circuito RC**.
+Aplicación de escritorio desarrollada con **Python**, **PySide6** y **Qt Designer** para aproximar funciones mediante polinomios de Taylor, calcular errores y analizar la precisión de los resultados. Incluye el caso de ingeniería asignado al **Grupo 2: descarga de un capacitor en un circuito RC**.
 
-La aplicación permite ingresar una función, el punto base `x0`, el punto de evaluación `x`, el orden máximo (0–15) y las cifras significativas. Muestra una tabla por orden, la tolerancia de Scarborough, las gráficas del método y la exportación a CSV.
+Permite introducir una función, el punto base `x0`, el punto de evaluación `x`, el orden máximo (0–15) y las cifras significativas. Muestra una tabla por orden, el criterio de Scarborough, tres gráficas y una opción para exportar resultados a CSV.
 
 ## Caso de aplicación: descarga del capacitor RC
 
-La tensión durante la descarga se modela mediante:
+El voltaje durante la descarga se modela mediante:
 
 \[
-v(t) = V_0 e^{-t/(RC)}
+v(t)=V_0e^{-t/(RC)}
 \]
 
-con voltaje inicial `V0` (V), resistencia `R` (Ω), capacitancia `C` (F) y tiempo `t` (s).
+Donde `V0` es el voltaje inicial (V), `R` la resistencia (Ω), `C` la capacitancia (F) y `t` el tiempo (s).
 
-Definiendo `x = t/(RC)`, se aproxima `exp(-x)` mediante la serie de Maclaurin:
+Al definir `x = t/(RC)`, usamos el polinomio de Maclaurin de `exp(-x)`:
 
 \[
-e^{-x} \approx \sum_{k=0}^{n} \frac{(-1)^k x^k}{k!}
+e^{-x}\approx \sum_{k=0}^{n}\frac{(-1)^kx^k}{k!}
 \]
 
-Para **`t = RC`**, se tiene `x = 1`. Con **tres cifras significativas**, la tolerancia de Scarborough es **0.05 %**. El resultado de referencia es:
+Para **`t = RC`**, se obtiene `x = 1`. Con **3 cifras significativas**, la tolerancia aproximada de Scarborough es **0.05 %**.
 
 | Magnitud | Valor |
 |---|---:|
 | `e^(-1)` verdadero | 0.367879441 |
-| Polinomio de orden 8 | 0.367881944 |
-| Términos necesarios | **9** |
+| Polinomio de Taylor de orden 8 | 0.367881944 |
+| Términos requeridos | **9** |
 | Orden requerido | **8** |
 
-Ejemplo físico incluido: `V0 = 12 V`, `R = 1000 Ω`, `C = 1000 µF = 0.001 F` y `t = 1 s`. Como `RC = 1 s`, el voltaje verdadero es aproximadamente **4.414553 V** y la aproximación con nueve términos es **4.414583 V**.
+Ejemplo físico incorporado en la aplicación:
+
+- Voltaje inicial: `V0 = 12 V`
+- Resistencia: `R = 1000 Ω`
+- Capacitancia: `C = 1000 µF = 0.001 F`
+- Tiempo: `t = 1 s`
+
+Como `RC = 1 s`, el voltaje verdadero es aproximadamente **4.414553294 V**; la aproximación con nueve términos es **4.414583333 V**.
+
+### Interpretación del resultado
+
+El voltaje del capacitor disminuye exponencialmente durante la descarga. Después de una constante de tiempo (`t = RC`), conserva aproximadamente **36.79 %** de su voltaje inicial. Para `V0 = 12 V`, eso corresponde a cerca de **4.41455 V**.
+
+En este ejemplo, el polinomio de Taylor de orden 8 satisface la tolerancia usada para tres cifras significativas. La diferencia entre el valor verdadero y el aproximado es pequeña, aunque no es exactamente cero.
 
 ## Herramientas
 
-- Python 3.10 o superior (entorno probado por el equipo: completar si procede)
+- Python 3.10 o superior
 - PySide6 y Qt Designer
 - NumPy
 - SymPy
 - Matplotlib
 - pytest
+- Git (para clonar y registrar contribuciones)
 
-## Instalación y ejecución (Windows)
+Las dependencias de Python están detalladas en `requirements.txt`.
 
-Clonar o descargar este repositorio y abrir la carpeta en **Visual Studio Code**. Desde la terminal de PowerShell:
+## Instalación y ejecución en Windows
+
+Estos pasos se realizan desde **PowerShell**, dentro de Visual Studio Code o de una terminal de Windows. Cada persona crea su propio entorno virtual; la carpeta `.venv/` no se guarda en GitHub.
+
+### 1. Descargar el repositorio
+
+```powershell
+git clone https://github.com/Navori20/CN-ParaleloA-Grupo2.git
+cd CN-ParaleloA-Grupo2
+```
+
+Si se descargó como ZIP, extraerlo y abrir una terminal **dentro de la carpeta que contiene `main.py` y `requirements.txt`**.
+
+### 2. Crear el entorno virtual
 
 ```powershell
 py -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-python main.py
 ```
 
-Si PowerShell bloquea la activación, ejecutar temporalmente en esa terminal:
+### 3. Activar el entorno virtual
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+Si PowerShell bloquea **solo la activación** por su política de ejecución, se puede habilitar temporalmente en esa sesión y volver a activarlo:
 
 ```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\.venv\Scripts\Activate.ps1
 ```
 
-Si no se dispone todavía de `requirements.txt`, instalar las dependencias con:
+Al funcionar, la terminal muestra `(.venv)` al comienzo del indicador.
+
+### 4. Instalar las dependencias
 
 ```powershell
-python -m pip install pyside6 numpy sympy matplotlib pytest
+python -m pip install -r requirements.txt
 ```
+
+Debe ejecutarse desde la raíz del repositorio. Si aparece `No such file or directory: requirements.txt`, comprobar la carpeta con `dir` y entrar a `CN-ParaleloA-Grupo2` si es necesario.
+
+### 5. Abrir la aplicación
+
+```powershell
+python main.py
+```
+
+### 6. Ejecutar las pruebas automáticas
+
+Cerrar la aplicación (si está abierta) y ejecutar:
+
+```powershell
+python -m pytest -v
+```
+
+La suite contiene **6 pruebas**; durante el desarrollo, las seis se ejecutaron correctamente. El resultado esperado después de una instalación correcta es `6 passed`.
 
 ## Uso de la aplicación
 
-1. Seleccionar un ejemplo precargado: **Descarga RC (grupo 2)**, **cos(x)** del libro, **exp(x)** de Scarborough o **Personalizado**.
-2. Introducir la función, `x0`, `x`, el orden máximo y las cifras significativas.
-3. Para el caso RC, ajustar voltaje inicial, resistencia, capacitancia (en **µF**) y tiempo. El programa calcula automáticamente `x = t/(RC)`.
-4. Presionar **Calcular Taylor** para ver la tabla de aproximaciones y errores, el resultado final y las tres gráficas.
-5. Usar **Limpiar** para borrar los resultados o **Exportar CSV** para guardar la tabla.
+1. Seleccionar un ejemplo: **Descarga RC (grupo 2)**, **cos(x)** del libro, **exp(x)** de Scarborough o **Personalizado**.
+2. Introducir una función, `x0`, `x`, el orden máximo y las cifras significativas.
+3. En el ejemplo RC, indicar voltaje inicial, resistencia, capacitancia (en **µF**) y tiempo. El programa calcula automáticamente `x = t/(RC)`.
+4. Pulsar **Calcular Taylor** para mostrar la tabla, el resultado y las gráficas.
+5. Usar **Limpiar** para restablecer los resultados o **Exportar CSV** para guardar la tabla.
 
-Las gráficas representan la función frente a los polinomios de Taylor, el error verdadero frente al orden y el error de truncamiento frente a `h` en escala log-log.
+## Interpretación de las gráficas
+
+La aplicación presenta tres gráficas para analizar el método de Taylor.
+
+### 1. Función y aproximaciones de Taylor
+
+Compara la función original con los polinomios de Taylor de distintos órdenes. Permite observar cómo mejora la aproximación a medida que aumentan los términos, especialmente cerca del punto de expansión `x0`.
+
+### 2. Error verdadero frente al orden
+
+Representa la magnitud del error relativo verdadero en función del orden del polinomio. Utiliza una escala logarítmica en el eje vertical para mostrar cómo cambia el error entre iteraciones.
+
+### 3. Error de truncamiento
+
+Muestra el error absoluto frente a la distancia al punto de expansión (`|h|`) en escala log-log. Para una función suficientemente derivable y si el primer término omitido es no nulo, el error suele comportarse como `|h|^(n+1)` cerca del punto base. La pendiente observada puede verse afectada por la precisión numérica.
 
 ## Estructura del proyecto
 
@@ -104,12 +168,15 @@ CN-ParaleloA-Grupo2/
 ├── metodo/
 │   ├── __init__.py
 │   └── taylor.py
-├── tests/
+├── Tests/
 │   └── test_metodo.py
-└── capturas/
+└── Capturas/
+    └── (capturas de los ejemplos y las gráficas)
 ```
 
-`main.py` maneja la interfaz y los eventos; `metodo/taylor.py` contiene la lógica del método; `graficas.py` prepara las visualizaciones; y `ui/ventana_principal.ui` es el diseño editable de Qt Designer. **No editar manualmente** `ui_ventana_principal.py`, pues se genera desde el archivo `.ui`:
+`main.py` administra la interfaz y sus eventos; `metodo/taylor.py` implementa el método; `graficas.py` prepara las visualizaciones; y `ui/ventana_principal.ui` es el diseño editable de Qt Designer.
+
+**No editar manualmente** `ui_ventana_principal.py`, porque se genera desde el archivo `.ui` con:
 
 ```powershell
 pyside6-uic ui/ventana_principal.ui -o ui_ventana_principal.py
@@ -117,45 +184,47 @@ pyside6-uic ui/ventana_principal.ui -o ui_ventana_principal.py
 
 ## Pruebas automáticas
 
-Desde la raíz del repositorio:
+Las seis pruebas del archivo `Tests/test_metodo.py` comprueban:
+
+1. Descarga del capacitor RC: orden 8 y nueve términos.
+2. Ejemplo `cos(x)` del libro de Chapra.
+3. Criterio de Scarborough aplicado a `exp(0.5)`.
+4. Rechazo de un orden superior a 15.
+5. Aproximación de Taylor para `sin(x)`.
+6. Rechazo de cero cifras significativas.
+
+Para ejecutarlas:
 
 ```powershell
-python -m pytest tests/test_metodo.py -v
+python -m pytest Tests/test_metodo.py -v
 ```
-
-Se incluyen cuatro pruebas: descarga RC, función `cos(x)` del libro, criterio de Scarborough para `exp(0.5)` y validación de un orden fuera del intervalo permitido. En la ejecución local realizada durante el desarrollo, **las cuatro pruebas pasaron**.
 
 ## Capturas de la interfaz
 
-**Pendiente antes de entregar:** guardar al menos tres capturas reales dentro de `capturas/`:
-
-1. `capturas/01_caso_rc.png` — pantalla de parámetros y resultados del capacitor RC.
-2. `capturas/02_grafica_taylor.png` — gráfica de función y aproximaciones.
-3. `capturas/03_grafica_error.png` — gráfica de error o truncamiento.
-
-Después de agregar las imágenes reales, se pueden mostrar aquí:
-
-```markdown
-![Caso RC](capturas/01_caso_rc.png)
-![Gráfica Taylor](capturas/02_grafica_taylor.png)
-![Análisis del error](capturas/03_grafica_error.png)
-```
+La carpeta `Capturas/` contiene imágenes capturadas durante las pruebas del proyecto, incluidas ejecuciones del caso RC y de los ejemplos matemáticos. Para verlas, abrir dicha carpeta en el repositorio.
 
 ## Defensa y entrega
 
-Cada integrante debe conocer el funcionamiento del código y del método de Taylor. El repositorio debe evidenciar **al menos tres commits propios de cada integrante**, según el enunciado. Entregar el enlace del repositorio y el ZIP correspondiente junto con las capturas e instrucciones, respetando las fechas del paralelo A.
+Cada integrante debe poder explicar el algoritmo, el criterio de error, el caso físico RC, las tres gráficas y el funcionamiento de la interfaz. El historial del repositorio debe evidenciar **al menos tres commits propios por integrante**.
 
-**Antes de entregar:** completar los roles reales, agregar las capturas e incluir `requirements.txt`; verificar que no se suba `.venv/` y que la aplicación se pueda ejecutar desde una copia limpia del repositorio.
+Antes de entregar, verificar:
 
-### Interpretación del resultado
+- Que las seis pruebas pasen después de actualizar el repositorio.
+- Que la aplicación abra, calcule y exporte CSV.
+- Que `README.md`, `requirements.txt`, `Tests/`, `ui/` y `Capturas/` estén incluidos.
+- Que `.venv/` y archivos temporales no se incluyan en el ZIP.
+- Que los tres integrantes puedan explicar sus aportes durante la defensa.
 
-El voltaje del capacitor disminuye exponencialmente durante la descarga.
+**Repositorio:** https://github.com/Navori20/CN-ParaleloA-Grupo2
 
-Para t = RC, el voltaje es aproximadamente el 36.79 % de su valor inicial.
+## Requisitos para la evaluación
 
-Con un voltaje inicial de 12 V, el capacitor conserva aproximadamente
-4.41455 V después de una constante de tiempo.
+Antes de presentar el proyecto, cada integrante debe:
 
-La aproximación de Taylor de orden 8 permite obtener este resultado
-con un error suficientemente pequeño para cumplir el criterio de
-Scarborough de tres cifras significativas.
+- Explicar cómo se construye el polinomio de Taylor.
+- Interpretar el criterio de error de Scarborough.
+- Demostrar el ejemplo de descarga del capacitor RC.
+- Explicar el funcionamiento de las tres gráficas.
+- Ejecutar las pruebas automáticas y mostrar sus resultados.
+
+La demostración debe realizarse con la aplicación funcionando.
