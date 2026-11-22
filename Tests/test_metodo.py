@@ -66,3 +66,10 @@ def test_taylor_seno():
         math.sin(0.5), abs=1e-6
     )
 
+
+
+def test_cifras_significativas_invalidas():
+    """Comprueba que no se permiten cero cifras significativas."""
+    with pytest.raises(ValueError):
+        taylor("exp(-x)", "0", "1", 15, 0)
+
