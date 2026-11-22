@@ -38,7 +38,7 @@ def _estilo(figura, titulo, xlabel, ylabel):
     figura.set_facecolor("#fafafa")
     ax = figura.add_subplot(111)
     ax.set_facecolor("#ffffff")
-    ax.set_title(titulo, fontsize=9, pad=9, fontweight="semibold")
+    ax.set_title("Comparación de la función original y las aproximaciones de Taylor", fontsize=9, pad=9, fontweight="semibold")
     ax.set_xlabel(xlabel, fontsize=8, labelpad=3)
     ax.set_ylabel(ylabel, fontsize=8, labelpad=3)
     ax.tick_params(axis="both", labelsize=7)
