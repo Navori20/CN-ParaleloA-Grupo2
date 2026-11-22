@@ -147,20 +147,15 @@ Cada integrante debe conocer el funcionamiento del código y del método de Tayl
 
 **Antes de entregar:** completar los roles reales, agregar las capturas e incluir `requirements.txt`; verificar que no se suba `.venv/` y que la aplicación se pueda ejecutar desde una copia limpia del repositorio.
 
-## Interpretación de las gráficas
+### Interpretación del resultado
 
-La aplicación presenta tres gráficas para analizar el método de Taylor.
+El voltaje del capacitor disminuye exponencialmente durante la descarga.
 
-### 1. Función y aproximaciones de Taylor
+Para t = RC, el voltaje es aproximadamente el 36.79 % de su valor inicial.
 
-Compara la función matemática original con los polinomios de Taylor de distintos órdenes. Permite observar cómo mejora la aproximación al aumentar el número de términos.
+Con un voltaje inicial de 12 V, el capacitor conserva aproximadamente
+4.41455 V después de una constante de tiempo.
 
-### 2. Error verdadero frente al orden
-
-Representa el error relativo verdadero en función del orden del polinomio. Se utiliza una escala logarítmica en el eje vertical para apreciar cómo disminuye el error.
-
-### 3. Error de truncamiento
-
-Muestra el error absoluto frente a la distancia al punto de expansión, utilizando escalas logarítmicas en ambos ejes.
-
-Para una función suficientemente derivable, el error de un polinomio de orden n suele ser proporcional a |h|^(n+1), cuando el primer término omitido no es nulo y el error numérico no domina.
+La aproximación de Taylor de orden 8 permite obtener este resultado
+con un error suficientemente pequeño para cumplir el criterio de
+Scarborough de tres cifras significativas.
