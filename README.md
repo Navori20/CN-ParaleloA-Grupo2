@@ -146,3 +146,63 @@ Después de agregar las imágenes reales, se pueden mostrar aquí:
 Cada integrante debe conocer el funcionamiento del código y del método de Taylor. El repositorio debe evidenciar **al menos tres commits propios de cada integrante**, según el enunciado. Entregar el enlace del repositorio y el ZIP correspondiente junto con las capturas e instrucciones, respetando las fechas del paralelo A.
 
 **Antes de entregar:** completar los roles reales, agregar las capturas e incluir `requirements.txt`; verificar que no se suba `.venv/` y que la aplicación se pueda ejecutar desde una copia limpia del repositorio.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Interpretación del resultado
+
+El voltaje del capacitor disminuye exponencialmente durante la descarga.
+
+Para t = RC, el voltaje es aproximadamente el 36.79 % de su valor inicial.
+
+Con un voltaje inicial de 12 V, el capacitor conserva aproximadamente
+4.41455 V después de una constante de tiempo.
+
+La aproximación de Taylor de orden 8 permite obtener este resultado
+con un error suficientemente pequeño para cumplir el criterio de
+Scarborough de tres cifras significativas.
