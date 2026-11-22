@@ -109,6 +109,10 @@ class Ventana(QMainWindow):
                     raise ValueError("El tiempo no puede ser negativo.")
                 capacitancia_f = capacitancia_uf * 1e-6
                 constante_tiempo = resistencia * capacitancia_f
+                if not math.isfinite(constante_tiempo) or constante_tiempo <= 0:
+                    raise ValueError(
+                        "La constante de tiempo RC debe ser positiva y finita."
+                    )
                 x_rc = tiempo / constante_tiempo
                 if not math.isfinite(x_rc):
                     raise ValueError("El cociente t/(RC) es demasiado grande.")
@@ -120,6 +124,11 @@ class Ventana(QMainWindow):
 
             x0_num = self.convertir_numero(x0)
             x_num = self.convertir_numero(x)
+            if not math.isfinite(x0_num) or not math.isfinite(x_num):
+                raise ValueError(
+                    "El punto base y el punto de evaluación deben ser números finitos."
+                )
+
             resultado = taylor(
                 funcion=funcion, x0=x0, x=x,
                 orden_maximo=orden, cifras=cifras,
