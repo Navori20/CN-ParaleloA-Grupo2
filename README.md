@@ -146,3 +146,21 @@ Después de agregar las imágenes reales, se pueden mostrar aquí:
 Cada integrante debe conocer el funcionamiento del código y del método de Taylor. El repositorio debe evidenciar **al menos tres commits propios de cada integrante**, según el enunciado. Entregar el enlace del repositorio y el ZIP correspondiente junto con las capturas e instrucciones, respetando las fechas del paralelo A.
 
 **Antes de entregar:** completar los roles reales, agregar las capturas e incluir `requirements.txt`; verificar que no se suba `.venv/` y que la aplicación se pueda ejecutar desde una copia limpia del repositorio.
+
+## Interpretación de las gráficas
+
+La aplicación presenta tres gráficas para analizar el método de Taylor.
+
+### 1. Función y aproximaciones de Taylor
+
+Compara la función matemática original con los polinomios de Taylor de distintos órdenes. Permite observar cómo mejora la aproximación al aumentar el número de términos.
+
+### 2. Error verdadero frente al orden
+
+Representa el error relativo verdadero en función del orden del polinomio. Se utiliza una escala logarítmica en el eje vertical para apreciar cómo disminuye el error.
+
+### 3. Error de truncamiento
+
+Muestra el error absoluto frente a la distancia al punto de expansión, utilizando escalas logarítmicas en ambos ejes.
+
+Para una función suficientemente derivable, el error de un polinomio de orden n suele ser proporcional a |h|^(n+1), cuando el primer término omitido no es nulo y el error numérico no domina.
