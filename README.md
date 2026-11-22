@@ -147,53 +147,6 @@ Cada integrante debe conocer el funcionamiento del código y del método de Tayl
 
 **Antes de entregar:** completar los roles reales, agregar las capturas e incluir `requirements.txt`; verificar que no se suba `.venv/` y que la aplicación se pueda ejecutar desde una copia limpia del repositorio.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### Interpretación del resultado
 
 El voltaje del capacitor disminuye exponencialmente durante la descarga.
